@@ -1,0 +1,70 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+	<h2 style="color: #FFFFFF;">Sunucu Yönetimi</h2>
+	<div class="row">
+		<div class="col col-4">
+			<%- include('../blocks/guild-card', {guild}) %>
+		</div>
+		<div class="col">
+      <div class="col">
+        <div class="container">
+          <form method="POST">
+
+            <div class="row">
+              <div class="col">
+                <label style="color: white;" for="OtomatikCevaplayıcıMesaj"> Mesaj </label>
+              </div>
+              <div class="col-75">
+              <input type="text" id="OtomatikCevaplayıcıMesaj" name="OtomatikCevaplayıcıMesaj" placeholder="Otomatik cevaplanacak mesajı yazın.">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label style="color: white;" for="OtomatikCevaplayıcıMesaj"> Cevap </label>
+              </div>
+              <div class="col-75">
+                <textarea class="form-control" id="OtomatikCevaplayıcıCevap" name="OtomatikCevaplayıcıCevap" rows="3" placeholder="Mesaja otomatik verilecek cevabı yazın." style="margin-top: 0px; margin-bottom: 0px; height: 65px;"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col"></div>
+              <div class="col-75">
+                <button type="submit" class="btn btn-primary"> Ekle <i class="fa fa-fw fa-save"></i> </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <br>
+        <table class="table table-hover" style="table-layout: fixed; color: white;">
+          <thead>
+            <tr>
+              <th scope="col" style="width: 25%"> Mesaj </th>
+              <th scope="col" style="width: 50%"> Cevap </th>
+              <th scope="col" style="width: 25%"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (!oto_cevaplayıcılar) { %>
+              <p><strong>Sunucunuz için oluşturulmuş otomatik cevaplayıcı bulunamadı.</strong></p>
+            <% } else {
+              for(var oto_cevaplayıcı of oto_cevaplayıcılar) { %>
+                  <tr>
+                    <th scope="row" style="color: white;"><%= oto_cevaplayıcı.mesaj %></th>
+                    <td style="color: white; align: left; word-wrap: break-word;"><%= oto_cevaplayıcı.cevap %></td>
+                    <td><a class="btn btn-danger" href="/sunucular/<%= guild.id %>/yonet/oto-cevaplayici/sil/<%= oto_cevaplayıcı.mesaj %>/<%= oto_cevaplayıcı.cevap %>"> Sil </a></td>
+                  </tr>
+                <% }} %>
+          </tbody>
+        </table>
+        <a href="/sunucular/<%= guild.id %>/yonet" class="btn btn-primary" style="color: white;"><i class="fa fa-fw fa-angle-left" aria-hidden="true"></i> Sunucu Yönetimi </a>
+        <a class="btn btn-secondary" style="color: white;" data-toggle="modal" style="color: white;" data-target="#variables"> Değişkenler <i class="fa fa-fw fa-bars" aria-hidden="true"></i> </a>
+        <a class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#autoRespondersDeleteModal" role="button"> Hepsini Sil <i class="fa fa-fw fa-close" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+
+<% include ../blocks/guild-modals %>
+<script type="text/javascript">
+	var ts = parseInt($('#guildCreate').text());
+	$('#guildCreate').html(`<strong>Created:</strong>: ${moment(ts).format('MMMM Do YYYY (h.mm a)')}`);
+</script>
+<% include ../blocks/footer %>

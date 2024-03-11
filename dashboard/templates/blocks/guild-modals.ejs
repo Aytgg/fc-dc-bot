@@ -1,0 +1,100 @@
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<div class="modal fade" id="serverLeaveModal" tabindex="-1" role="dialog" aria-labelledby="serverLeaveModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+				<h5 class="modal-title" id="serverLeaveModalLabel" style="background-color: #303030; color: #ffffff;">Emin misin?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #ffffff;">
+				<p>
+					<%= bot.user.username %> botunu bu sunucudan atmayı onaylıyor musunuz?
+				</p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #ffffff; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hayır, İptal</button>
+				<a class="btn btn-outline-danger" href="/sunucular/<%= guild.id %>/leave" role="button">Evet, At</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="settingsResetModal" tabindex="-1" role="dialog" aria-labelledby="settingsResetModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+				<h5 class="modal-title" id="settingsResetModalLabel">Emin misin?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #ffffff;">
+				<p>
+					Ayarları sıfırlamayı onaylıyor musunuz?
+				</p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #ffffff; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hayır, İptal</button>
+				<a class="btn btn-outline-danger" href="/sunucular/<%= guild.id %>/reset" role="button">Evet, Sıfırla</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="variables" tabindex="-1" role="dialog" aria-labelledby="variablesLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+				<h5 class="modal-title" id="variablesLabel"> Değişkenler </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #ffffff;">
+				<p>
+          Kullanıcı Değişkenleri
+          <br><strong>{{kullanıcı.isim}}</strong>: Mesajı yazan kullanıcının ismini gösterir.
+          <br><strong>{{kullanıcı.id}}</strong>: Mesajı yazan kullanıcının ID'sini gösterir.
+          <br><strong>{{kullanıcı.tag}}</strong>: Mesajı yazan kullanıcının ismini tagıyla birlikte gösterir.
+          <br><strong>{{@kullanıcı}}</strong>: Mesajı yazan kullanıcıyı etiketler.
+          <br><br> Sunucu Değişkenleri
+          <br><strong>{{sunucu.isim}}</strong>: Mesajın yazıldığı sunucunun ismini gösterir.
+          <br><strong>{{sunucu.id}}</strong>: Mesajın yazıldığı sunucunun ID'sini gösterir.
+          <br><strong>{{sunucu.üyeler}}</strong>: Mesajın yazıldığı sunucunun sahip olduğu üye sayısını gösterir.
+          <br><br> Kanal Değişkenleri
+          <br><strong>{{kanal.isim}}</strong>: Mesajın yazıldığı kanalın ismini gösterir.
+          <br><strong>{{kanal.id}}</strong></strong>: Mesajın yazıldığı kanalın ID'sini gösterir.
+          <br><strong>{{#kanal}}</strong>: Mesajın yazıldığı kanalı etiketler.
+				</p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #ffffff; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal"> Kapat </button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="autoRespondersDeleteModal" tabindex="-1" role="dialog" aria-labelledby="autoRespondersDeleteModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content" style="background-color: #303030; color: #ffffff;">
+			<div class="modal-header" style="border: 0px;">
+				<h5 class="modal-title" id="autoRespondersDeleteModalLabel">Emin misin?</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body" style="background-color: #303030; color: #ffffff;">
+				<p>
+					Bütün otomatik cevaplayıcıları silmeyi onaylıyor musunuz?
+				</p>
+			</div>
+			<div class="modal-footer" style="background-color: #303030; color: #ffffff; border: 0px;">
+				<button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Hayır, İptal</button>
+				<a class="btn btn-outline-danger" href="/sunucular/<%= guild.id %>/yonet/oto-cevaplayici/hepsini-sil" role="button">Evet, Sil</a>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,44 @@
+@-webkit-keyframes float-landing {
+  0% {
+    -webkit-transform: translate3d(0,0px,0);
+    transform: translate3d(0,-20px,0)
+  }
+  to {
+    -webkit-transform: translate3d(0,20px,0);
+    transform: translate3d(0,0px,0)
+  }
+}
+@keyframes float-landing {
+  0% {
+    -webkit-transform: translate3d(0,0px,0);
+    transform: translate3d(0,-20px,0)
+  }
+  to {
+    -webkit-transform: translate3d(0,20px,0);
+    transform: translate3d(0,0px,0)
+  }
+}
+.bot-img {
+  background: transparent !important;
+}
+.bot-img img {
+  border-radius: 100% !important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  border-top: 40px !important;
+  border-bottom: 40px !important;
+  -webkit-animation-name: float-landing;
+  animation-name: float-landing;
+  -webkit-animation-duration: 1.5s;
+  animation-duration: 1.5s;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-direction: alternate;
+  animation-direction: alternate;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out
+}
+
+body {
+  background-image: url('https://cdn.wallpapersafari.com/62/14/K65Cc2.jpg') !important;
+}

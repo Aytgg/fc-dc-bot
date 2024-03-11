@@ -1,0 +1,315 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+	<h2 style="color: #FFFFFF;">Sunucu Yönetimi</h2>
+	<div class="row">
+		<div class="col col-4">
+			<%- include('../blocks/guild-card', {guild}) %>
+		</div>
+		<div class="col">
+      <div class="container">
+        <form method="POST">
+          <ul class="list-group list-group-flush">
+
+            <div class="row">
+              <div class="col-25">
+                <label for="Prefix"> Prefix </label>
+              </div>
+              <div class="col-75">
+                <input type="text" id="Prefix" name="Prefix" placeholder="<%=guild.commandPrefix%>">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="ModLogKanalı"> Mod-Log Kanalı </label>
+              </div>
+              <div class="col-75">
+                <select id="ModLogKanalı" name="ModLogKanalı">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var kanal of kanallar) { %>
+                    <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('ModLogKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="OtoRol"> Oto-Rol </label>
+              </div>
+              <div class="col-75">
+                <select id="OtoRol" name="OtoRol">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('OtoRol')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+
+            <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+            <div style="text-align: center">Filtreler</div>
+            <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <input type="checkbox" id="KüfürFiltresi" name="KüfürFiltresi" <% if (guild.settings.get('KüfürFiltresi')) { %> checked <% } %>>
+                <label for="KüfürFiltresi"> Küfür Filtresi </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <input type="checkbox" id="ReklamFiltresi" name="ReklamFiltresi" <% if (guild.settings.get('ReklamFiltresi')) { %> checked <% } %>>
+                <label for="ReklamFiltresi"> Reklam Filtresi </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <input type="checkbox" id="LinkFiltresi" name="LinkFiltresi" <% if (guild.settings.get('LinkFiltresi')) { %> checked <% } %>>
+                <label for="LinkFiltresi"> Link Filtresi </label>
+              </div>
+            </div>
+
+            <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+            <div style="text-align: center">Sayaç Sistemi</div>
+            <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+            <div class="row">
+                <div class="col-25">
+                  <label for="Sayaç"> Sayaç Hedefi </label>
+                </div>
+                <div class="col-75">
+                  <input type="number" id="Sayaç" name="Sayaç" <% if (guild.settings.get('Sayaç')) { %> placeholder="<%= guild.settings.get('Sayaç') %>" <% } %>>
+                </div>
+              </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="SayaçKanalı"> Sayaç Kanalı </label>
+              </div>
+              <div class="col-75">
+                <select id="SayaçKanalı" name="SayaçKanalı">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var kanal of kanallar) { %>
+                    <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('SayaçKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            
+
+            <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+            <div style="text-align: center">Resimli Giriş-Çıkış Sistemi</div>
+            <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <input type="checkbox" id="ResimliGiriş" name="ResimliGiriş" <% if (guild.settings.get('ResimliGiriş')) { %> checked <% } %>>
+                <label for="ResimliGiriş"> Resimli Giriş </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25"></div>
+              <div class="col-75">
+                <input type="checkbox" id="ResimliÇıkış" name="ResimliÇıkış" <% if (guild.settings.get('ResimliÇıkış')) { %> checked <% } %>>
+                <label for="ResimliÇıkış"> Resimli Çıkış </label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="ResimliGirişÇıkışArkaplanı"> Resimli Giriş-Çıkış Arkaplanı </label>
+              </div>
+              <div class="col-75">
+                <br>
+                <select id="ResimliGirişÇıkışArkaplanı" name="ResimliGirişÇıkışArkaplanı">
+                <% for(var arkaplan of arkaplanlar) { %>
+                  <option value=<%= arkaplan.name %> <% if (arkaplan.name == guild.settings.get('ResimliGirişÇıkışArkaplanı')) { %> selected <% } %>><%= arkaplan.name %></option>
+                <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="ResimliGirişÇıkışKanalı"> Resimli Giriş-Çıkış Kanalı </label>
+              </div>
+              <div class="col-75">
+                <select id="ResimliGirişÇıkışKanalı" name="ResimliGirişÇıkışKanalı">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var kanal of kanallar) { %>
+                    <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('ResimliGirişÇıkışKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+
+            <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+            <div style="text-align: center">Kayıt Sistemi</div>
+            <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+            <div class="row">
+              <div class="col-25">
+                <label for="KayıtçıRolü"> Kayıtçı Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="KayıtçıRolü" name="KayıtçıRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('KayıtçıRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="KayıtsızÜyeRolü"> Kayıtsız Üye Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="KayıtsızÜyeRolü" name="KayıtsızÜyeRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('KayıtsızÜyeRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="TeyitsizÜyeRolü"> Teyitsiz Üye Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="TeyitsizÜyeRolü" name="TeyitsizÜyeRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('TeyitsizÜyeRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="ErkekÜyeRolü"> Erkek Üye Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="ErkekÜyeRolü" name="ErkekÜyeRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('ErkekÜyeRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="KadınÜyeRolü"> Kadın Üye Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="KadınÜyeRolü" name="KadınÜyeRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('KadınÜyeRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+            <div style="text-align: center">Ekip Sistemi</div>
+            <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+            <div class="row">
+              <div class="col-25">
+                <label for="EkipRolü"> Ekip Rolü </label>
+              </div>
+              <div class="col-75">
+                <select id="EkipRolü" name="EkipRolü">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var rol of roller) { %>
+                    <option value=<%= rol.id %> <% if (rol.id == guild.settings.get('EkipRolü')) { %> selected <% } %>><%= rol.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                  <label for="EkipTagı"> Ekip Tagı </label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="EkipTagı" name="EkipTagı" <% if (guild.settings.get('EkipTagı')) { %> placeholder="<%= guild.settings.get('EkipTagı') %>" <% } %>>
+                </div>
+              </div>
+
+            <div id="otherSettings" class="in collapse" style="">
+              <div style="text-align: center">┏╋━━━━━━◥◣◆◢◤━━━━━━╋┓</div>
+              <div style="text-align: center">Diğer Ayarlar</div>
+              <div style="text-align: center">┗╋━━━━━━◥◣◆◢◤━━━━━━╋┛</div>
+
+              <div class="row">
+                <div class="col-25">
+                  <label for="BaşvuruKanalı"> Başvuru Kanalı </label>
+                </div>
+                <div class="col-75">
+                  <select id="BaşvuruKanalı" name="BaşvuruKanalı">
+                    <option value="kapat"> Kapalı </option>
+                    <option disabled> ------- </option>
+                    <% for(var kanal of kanallar) { %>
+                      <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('BaşvuruKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="ÇekilişKanalı"> Çekiliş Kanalı </label>
+                </div>
+                <div class="col-75">
+                  <select id="ÇekilişKanalı" name="ÇekilişKanalı">
+                    <option value="kapat"> Kapalı </option>
+                    <option disabled> ------- </option>
+                    <% for(var kanal of kanallar) { %>
+                      <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('ÇekilişKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                    <% } %>
+                  </select>
+                </div>
+              </div>
+              <div class="row">
+              <div class="col-25">
+                <label for="CezalarKanalı"> Cezalar Kanalı </label>
+              </div>
+              <div class="col-75">
+                <select id="CezalarKanalı" name="CezalarKanalı">
+                  <option value="kapat"> Kapalı </option>
+                  <option disabled> ------- </option>
+                  <% for(var kanal of kanallar) { %>
+                    <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('CezalarKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                  <% } %>
+                </select>
+              </div>
+            </div>
+            </div>
+
+            <div style="width: 100%; text-align: right; margin-top: 15px;">
+              <a class="btn btn-secondary collapsed" data-toggle="collapse" style="color: white;" data-target="#otherSettings" aria-expanded="false">Diğer Ayarlar <i class="fa fa-fw fa-eye" aria-hidden="true"></i></a>
+              <a class="btn btn-danger" style="color: white;" data-toggle="modal" data-target="#settingsResetModal" role="button">Ayarları Sıfırla <i class="fa fa-fw fa-cogs" aria-hidden="true"></i></a>
+              <button type="submit" class="btn btn-primary"> Kaydet <i class="fa fa-fw fa-save"></i> </button>
+            </div>
+            <div style="width: 100%; text-align: right; margin-top: 15px;">
+              <a href="/sunucular/<%= guild.id %>/yonet/oto-cevaplayici" class="btn btn-primary" style="color: white;"> Otomatik Cevaplayıcılar <i class="fa fa-fw fa-angle-right" aria-hidden="true"></i></a>
+            </div>
+          </ul>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<% include ../blocks/guild-modals %>
+<script type="text/javascript">
+	var ts = parseInt($('#guildCreate').text());
+	$('#guildCreate').html(`<strong>Created:</strong>: ${moment(ts).format('MMMM Do YYYY (h.mm a)')}`);
+</script>
+<% include ../blocks/footer %>

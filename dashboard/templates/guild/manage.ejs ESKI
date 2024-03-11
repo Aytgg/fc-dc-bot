@@ -1,0 +1,205 @@
+<%- include('../blocks/header', {bot, user, path}) %>
+
+
+<style>
+  input[type="checkbox"] { 
+      position: absolute;
+      opacity: 0;
+  }
+
+  /* Normal Track */
+  input[type="checkbox"].ios-switch + div {
+      vertical-align: middle;
+      width: 40px;    height: 20px;
+      border: 1px solid rgba(0,0,0,.4);
+      border-radius: 999px;
+      background-color: rgba(0, 0, 0, 0.1);
+      -webkit-transition-duration: .4s;
+      -webkit-transition-property: background-color, box-shadow;
+      box-shadow: inset 0 0 0 0px rgba(0,0,0,0.4);
+      margin: 15px 1.2em 15px 2.5em;
+  }
+
+  /* Checked Track (Blue) */
+  input[type="checkbox"].ios-switch:checked + div {
+      width: 40px;
+      background-position: 0 0;
+      background-color: #3b89ec;
+      border: 1px solid #0e62cd;
+      box-shadow: inset 0 0 0 10px rgba(59,137,259,1);
+  }
+
+  /* Tiny Track */
+  input[type="checkbox"].tinyswitch.ios-switch + div {
+      width: 34px;    height: 18px;
+  }
+
+  /* Big Track */
+  input[type="checkbox"].bigswitch.ios-switch + div {
+      width: 50px;    height: 25px;
+  }
+
+  /* Green Track */
+  input[type="checkbox"].green.ios-switch:checked + div {
+      background-color: #00e359;
+      border: 1px solid rgba(0, 162, 63,1);
+      box-shadow: inset 0 0 0 10px rgba(0,227,89,1);
+  }
+
+  /* Normal Knob */
+  input[type="checkbox"].ios-switch + div > div {
+      float: left;
+      width: 18px; height: 18px;
+      border-radius: inherit;
+      background: #ffffff;
+      -webkit-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+      -webkit-transition-duration: 0.4s;
+      -webkit-transition-property: transform, background-color, box-shadow;
+      -moz-transition-timing-function: cubic-bezier(.54,1.85,.5,1);
+      -moz-transition-duration: 0.4s;
+      -moz-transition-property: transform, background-color;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(0, 0, 0, 0.4);
+      pointer-events: none;
+      margin-top: 1px;
+      margin-left: 1px;
+  }
+
+  /* Checked Knob (Blue Style) */
+  input[type="checkbox"].ios-switch:checked + div > div {
+      -webkit-transform: translate3d(20px, 0, 0);
+      -moz-transform: translate3d(20px, 0, 0);
+      background-color: #ffffff;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+  }
+
+  /* Tiny Knob */
+  input[type="checkbox"].tinyswitch.ios-switch + div > div {
+      width: 16px; height: 16px;
+      margin-top: 1px;
+  }
+
+  /* Checked Tiny Knob (Blue Style) */
+  input[type="checkbox"].tinyswitch.ios-switch:checked + div > div {
+      -webkit-transform: translate3d(16px, 0, 0);
+      -moz-transform: translate3d(16px, 0, 0);
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+  }
+
+  /* Big Knob */
+  input[type="checkbox"].bigswitch.ios-switch + div > div {
+      width: 23px; height: 23px;
+      margin-top: 1px;
+  }
+
+  /* Checked Big Knob (Blue Style) */
+  input[type="checkbox"].bigswitch.ios-switch:checked + div > div {
+      -webkit-transform: translate3d(25px, 0, 0);
+      -moz-transform: translate3d(16px, 0, 0);
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3), 0px 0px 0 1px rgba(8, 80, 172,1);
+  }
+
+  /* Green Knob */
+  input[type="checkbox"].green.ios-switch:checked + div > div {
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(0, 162, 63,1);
+  }
+
+
+  .kutu {
+    background-color: #00c0ef;
+	  height: 100%;
+	  border: 2px hidden; border-radius: 15px;
+	}
+</style>
+
+
+
+	<h2 style="color: #FFFFFF;">Sunucu Yönetimi</h2>
+	<div class="row">
+		<div class="col col-4">
+			<%- include('../blocks/guild-card', {guild}) %>
+		</div>
+		<div class="col" style="width: 50%;">
+			<%- include('../blocks/guild-nav.ejs', {active: "manage", guild}) %>
+			<ul class="list-group list-group-flush">
+        <div class="input-group mb-2 mr-sm-2 mb-sm-0" style="width: 100%; margin: 0 !important;">
+          <div class="input-group-addon" style="width: 99%; text-align: center; margin: 5.5px; color: #ffffff; font-size: 15px;">
+
+            <form action="/dashboard/<%= guild.id %>/manage/filtreler" method="post" style="border: 1.5px solid black; height: 100%">
+              <li class="list-group-item" style="padding: 0; background-color: #444444;">
+                <label><input type="checkbox" name="KüfürFiltresi" class="ios-switch" <% if (guild.settings.get('KüfürFiltresi')) { %> checked <% } %> /><div><div></div></div> Küfür Filtresi </label>
+              </li>
+              <li class="list-group-item" style="padding: 0; background-color: #444444;">
+                <label><input type="checkbox" name="ReklamFiltresi" class="ios-switch" <% if (guild.settings.get('ReklamFiltresi')) { %> checked <% } %> /><div><div></div></div> Reklam Filtresi </label>
+              </li>
+              <li class="list-group-item" style="padding: 0; background-color: #444444;">
+                <label><input type="checkbox" name="LinkFiltresi" class="ios-switch" <% if (guild.settings.get('LinkFiltresi')) { %> checked <% } %> /><div><div></div></div> Link Filtresi </label>
+              </li>
+              <br>
+              <a class="btn btn-primary" data-target="submit" role="button">Kaydet <i class="fa fa-fw fa-save"></i></a>
+              <br>
+            </form>
+
+            <form action="/dashboard/<%= guild.id %>/manage/resimliGirisCikis" method="post" style="border: 1.5px solid black; height: 100%">
+              <li class="list-group-item" style="padding: 0; background-color: #444444;">
+                <label><input type="checkbox" name="ResimliGiriş" class="ios-switch" <% if (guild.settings.get('ResimliGiriş')) { %> checked <% } %> /><div><div></div></div> Resimli Giriş </label>
+              </li>
+              <li class="list-group-item" style="padding: 0; background-color: #444444;">
+                <label><input type="checkbox" name="ResimliÇıkış" class="ios-switch" <% if (guild.settings.get('ResimliÇıkış')) { %> checked <% } %> /><div><div></div></div> Resimli Çıkış </label>
+              </li>
+              <li>
+              <label><select name="ResimliGirişÇıkışArkaplanı">
+                <% for(var arkaplan of arkaplanlar) { %>
+                  <option value=<%= arkaplan.name %> <% if (arkaplan.name == guild.settings.get('ResimliGirişÇıkışArkaplanı')) { %> selected <% } %>><%= arkaplan.name %></option>
+                <% } %>
+              </select><div><div></div></div> Resimli <br> Giriş-Çıkış <br> Arkaplanı </label>
+              </li>
+              <br>
+              <!-- <input type="submit" class="btn btn-primary" value="Kaydet"> -->
+              <a class="btn btn-primary" data-target="submit" role="button">Kaydet <i class="fa fa-fw fa-save"></i></a>
+              <br>
+            </form>
+
+            <form action="/dashboard/<%= guild.id %>/manage/kanallar" method="post" style="border: 1.5px solid black; height: 100%">
+              <li>
+              <label><select name="BaşvuruKanalı">
+                <option value="kapat"> Kapalı </option>
+                <option disabled> ------- </option>
+                <% for(var kanal of kanallar) { %>
+                  <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('BaşvuruKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                <% } %>
+              </select><div><div></div></div> Başvuru <br> Kanalı </label>
+              </li>
+              <li>
+              <label><select name="CezalarKanalı">
+                <option value="kapat"> Kapalı </option>
+                <option disabled> ------- </option>
+                <% for(var kanal of kanallar) { %>
+                  <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('CezalarKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                <% } %>
+              </select><div><div></div></div> Cezalar <br> Kanalı </label>
+              </li>
+              <li>
+              <label><select name="ModLogKanalı">
+                <option value="kapat"> Kapalı </option>
+                <option disabled> ------- </option>
+                <% for(var kanal of kanallar) { %>
+                  <option value=<%= kanal.id %> <% if (kanal.id == guild.settings.get('ModLogKanalı')) { %> selected <% } %>><%= kanal.name %></option>
+                <% } %>
+              </select><div><div></div></div> Mod-Log <br> Kanalı </label>
+              </li>
+              <br>
+              <a class="btn btn-primary" data-target="submit" role="button">Kaydet <i class="fa fa-fw fa-save"></i></a>
+              <br>
+            </form>
+          </div>
+        </div>
+      </ul>
+    </div>
+  </div>
+
+<% include ../blocks/guild-modals %>
+<script type="text/javascript">
+	var ts = parseInt($('#guildCreate').text());
+	$('#guildCreate').html(`<strong>Created:</strong>: ${moment(ts).format('MMMM Do YYYY (h:mm a)')}`);
+</script>
+<% include ../blocks/footer %>
